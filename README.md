@@ -1,5 +1,7 @@
 # FastMonkey 
 
+1.0.0.1002
+
 > A Swift implementation of Monkey TEST(Non-Stub) for iOS that runs on Simulator/iOS devices. 
 
 - homepage :  https://testerhome.com/topics/9524
