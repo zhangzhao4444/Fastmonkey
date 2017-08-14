@@ -1,0 +1,4 @@
+github "glock45/swifter" == 1.3.3
+github "SwiftyJSON/SwiftyJSON"
+github "cezheng/Fuzi" ~> 1.0.0
+github "tadija/AEXML"
