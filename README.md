@@ -1,13 +1,13 @@
 # FastMonkey 
 
+> A Swift implementation of Monkey TEST(Non-Stub) for iOS that runs on Simulator/iOS devices. 
+
 1.0.0.1002 支持
 1. 非插桩monkey点击事件
 2. app后台或退出检测
 3. 基于控件点击事件
 4. 自定义业务序列事件
 
-
-> A Swift implementation of Monkey TEST(Non-Stub) for iOS that runs on Simulator/iOS devices. 
 
 - homepage :  https://testerhome.com/topics/9524
 
