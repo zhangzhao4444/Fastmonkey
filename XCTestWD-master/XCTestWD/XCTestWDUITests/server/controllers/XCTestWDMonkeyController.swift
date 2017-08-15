@@ -59,7 +59,7 @@ internal class XCTestWDMonkeyController: Controller {
             return HttpResponse.internalServerError
         }
         
-        sleep(10)
+        sleep(3)
         NSLog("XCTestWDSetup->start fastmonkey<-XCTestWDSetup")
         
         _ = app.descendants(matching: .any).element(boundBy: 0).frame
