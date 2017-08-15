@@ -15,7 +15,6 @@ xcuserdata
 profile
 *.moved-aside
 DerivedData
-project.pbxproj
 .idea/
 # Normal
 .project
