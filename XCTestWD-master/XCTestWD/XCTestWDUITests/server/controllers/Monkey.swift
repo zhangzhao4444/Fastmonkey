@@ -57,6 +57,12 @@ import UIKit
     ```
 */
 public class Monkey {
+    let elapsedTime = 0 * 1000 * 1000  // ?s *1000*1000
+    let actionMax = 0
+    let throttle = 0 * 1000  // ?ms *1000
+    let randomize_throttle = false
+    
+    
     var r: Random
     let frame: CGRect
 
@@ -72,6 +78,8 @@ public class Monkey {
 
     var checkActions: [(interval: Int, action: (Void) -> Void)]
     var pid = 0
+    
+    var count = 0
 
     /**
         Create a Monkey object with a randomised seed.
@@ -162,6 +170,18 @@ public class Monkey {
                 self.actSpecial()
             }
         }
+        DispatchQueue.global().async {
+            if self.elapsedTime != 0{
+                usleep(useconds_t(self.elapsedTime))
+                exit(0)
+            }
+            if self.actionMax != 0{
+                while self.actionMax >= self.count{
+                    usleep(500000)
+                }
+                exit(0)
+            }
+        }
     }
 
     /// Generate random events forever, or until the app crashes.
@@ -179,12 +199,37 @@ public class Monkey {
                 self.actSpecial()
             }
         }
+        DispatchQueue.global().async {
+            if self.elapsedTime != 0{
+                usleep(useconds_t(self.elapsedTime))
+                exit(0)
+            }
+            if self.actionMax != 0{
+                while self.actionMax >= self.count{
+                    usleep(500000)
+                }
+                exit(0)
+            }
+        }
     }
 
     public func actionLock(action:@escaping ()->Void){
         let work = DispatchWorkItem(qos:.default){
             self.lock.wait()
+            self.count += 1
             action()
+            if self.throttle != 0 {
+                if self.randomize_throttle {
+                    var throttle = self.r.randomInt(lessThan: self.throttle/1000)*1000
+                    if throttle < 50*1000 {
+                        throttle = 50*1000
+                    }
+                    usleep(useconds_t(throttle))
+                }
+                else{
+                    usleep(useconds_t(self.throttle))
+                }
+            }
             self.lock.signal()
             return
         }
