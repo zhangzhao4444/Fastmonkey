@@ -2,8 +2,7 @@
 //  testUITests.swift
 //  testUITests
 //
-//  Created by xdf on 14/04/2017.
-//  Copyright © 2017 xdf. All rights reserved.
+//  fixed by zhangzhao on 29/08/2017.
 //
 
 import XCTest
@@ -11,7 +10,9 @@ import Swifter
 
 
 class XCTextWDRunner: XCTestCase {
+    var serverMode = true
     var server: XCTestWDServer?
+    var monkey: XCTestWDMonkey?
     override func setUp() {
         super.setUp()
         continueAfterFailure = false
@@ -26,13 +27,19 @@ class XCTextWDRunner: XCTestCase {
     }
     
     func testRunner() {
-        self.server = XCTestWDServer()
-        self.server?.startServer()
-        
+        if serverMode {
+            self.server = XCTestWDServer()
+            self.server?.startServer()
+        }else{
+            self.monkey = XCTestWDMonkey()
+            _ = self.monkey?.startMonkey()
+        }
     }
     
     @objc func terminate(notification: NSNotification){
-        self.server?.stopServer();
+        if serverMode {
+            self.server?.stopServer()
+        }
         NSLog("XCTestWDTearDown->Session Reset")
         assert(false, "")
     }
