@@ -57,7 +57,7 @@ import UIKit
     ```
 */
 public class Monkey {
-    let elapsedTime = 0 * 1000 * 1000  // ?s *1000*1000
+    let elapsedTime = 0  // ?s
     let actionMax = 0
     let throttle = 0 * 1000  // ?ms *1000
     let randomize_throttle = false
@@ -172,7 +172,7 @@ public class Monkey {
         }
         DispatchQueue.global().async {
             if self.elapsedTime != 0{
-                usleep(useconds_t(self.elapsedTime))
+                Thread.sleep(forTimeInterval: TimeInterval(self.elapsedTime))
                 exit(0)
             }
             if self.actionMax != 0{
