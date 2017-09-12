@@ -201,7 +201,7 @@ public class Monkey {
         }
         DispatchQueue.global().async {
             if self.elapsedTime != 0{
-                usleep(useconds_t(self.elapsedTime))
+                Thread.sleep(forTimeInterval: TimeInterval(self.elapsedTime))
                 exit(0)
             }
             if self.actionMax != 0{
