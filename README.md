@@ -48,18 +48,12 @@ To execute Monkey for iOS device, run the following command:
 #
 $ iproxy 8001 8001
 
-$ xcodebuild -project XCTestWD.xcodeproj \
-           -scheme XCTestWDUITests \
-           -destination 'platform=iOS,name=(your device name)' \
-           XCTESTWD_PORT=8001 \
-           clean test
+$ xcodebuild -project XCTestWD.xcodeproj -scheme XCTestWDUITests -destination 'platform=iOS,name=(your device name)' XCTESTWD_PORT=8001 clean test
 #
 # Now server is started and listening in 8001
 # To start Monkey run:
 
-$curl -X POST -H "Content-Type:application/json" \
-              -d "{\"desiredCapabilities\":{\"deviceName\":\"xxxx\",\"platformName\":\"iOS\", \"bundleId\":\"com.PandaTV.Live-iPhone\",\"autoAcceptAlerts\":\"false\"}}" \
-			  http://127.0.0.1:8001/wd/hub/monkey
+$curl -X POST -H "Content-Type:application/json" -d "{\"desiredCapabilities\":{\"deviceName\":\"xxxx\",\"platformName\":\"iOS\", \"bundleId\":\"com.PandaTV.Live-iPhone\",\"autoAcceptAlerts\":\"false\"}}"  http://127.0.0.1:8001/wd/hub/monkey
 
 
 ```
