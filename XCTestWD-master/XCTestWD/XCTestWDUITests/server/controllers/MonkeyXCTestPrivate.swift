@@ -33,13 +33,17 @@ extension Monkey {
         strong requirements on exactly which ones you need.
     */
     public func addDefaultXCTestPrivateActions() {
-        addXCTestTapAction(weight: 35)
         //addXCTestElementTapAction(weight: 10)
+        
+        
+        addXCTestTapAction(weight: 35)
+        
         addXCTestLongPressAction(weight: 1)
         addXCTestDragAction(weight: 1)
         addXCTestPinchCloseAction(weight: 1)
         addXCTestPinchOpenAction(weight: 1)
         addXCTestRotateAction(weight: 1)
+        addXCTestSlipScreenAction(weight: 5)
         //addXCTestOrientationAction(weight: 1) // TODO: Investigate why this does not work.
     }
 
@@ -283,6 +287,20 @@ extension Monkey {
             
             let semaphore = DispatchSemaphore(value: 0)
             self!.sharedXCEventGenerator.pressAtPoint(start, forDuration: 0, liftAtPoint: end, velocity: 1000, orientation: orientationValue, name: "Monkey drag" as NSString) {
+                semaphore.signal()
+            }
+            semaphore.wait()
+        }
+    }
+
+    public func addXCTestSlipScreenAction(weight: Double) {
+        addAction(weight: weight) { [weak self] in
+            let points = self!.randomSlipPoints()
+            let start = points[0]
+            let end = points[1]
+
+            let semaphore = DispatchSemaphore(value: 0)
+            self!.sharedXCEventGenerator.pressAtPoint(start, forDuration: 0, liftAtPoint: end, velocity: 1000, orientation: orientationValue, name: "Monkey slip" as NSString) {
                 semaphore.signal()
             }
             semaphore.wait()

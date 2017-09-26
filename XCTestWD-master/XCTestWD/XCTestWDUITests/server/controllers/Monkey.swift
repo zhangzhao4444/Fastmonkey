@@ -372,6 +372,19 @@ public class Monkey {
         return CGPoint(x: rect.origin.x + randomCGFloat(lessThan: rect.size.width), y: rect.origin.y +  randomCGFloat(lessThan: rect.size.height))
     }
 
+    public func randomSlipPoints() -> [CGPoint] {
+        var points :[CGPoint] = []
+        var x :CGFloat = 0
+        if (arc4random() % 2 == 0){
+            x = frame.size.width * 0.1
+        } else {
+            x = frame.size.width * 0.9
+        }
+        points.append(CGPoint(x: x , y: frame.size.height * 0.5))
+        points.append(CGPoint(x: frame.size.width - x, y: frame.size.height * 0.5))
+        return points
+    }
+
     /// Generate a random `CGRect` inside the frame of the app.
     public func randomRect() -> CGRect {
         return rect(around: randomPoint(), inRect: frame)
