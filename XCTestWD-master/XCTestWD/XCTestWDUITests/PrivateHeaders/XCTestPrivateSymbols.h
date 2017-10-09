@@ -18,7 +18,7 @@ extern NSNumber *XCAXAIsVisibleAttribute;
 extern NSNumber *XCAXAIsElementAttribute;
 
 /*! Getter for  XCTest logger */
-extern id<XCDebugLogDelegate> (*XCDebugLogger)();
+extern id<XCDebugLogDelegate> (*XCDebugLogger)(void);
 
 /*! Setter for  XCTest logger */
 extern void (*XCSetDebugLogger)(id <XCDebugLogDelegate>);
@@ -34,4 +34,4 @@ void *RetrieveXCTestSymbol(const char *name);
 /*! Static constructor that will retrieve XCTest private symbols */
 __attribute__((constructor)) void LoadXCTestSymbols(void);
 
-int portNumber();
+int portNumber(void);

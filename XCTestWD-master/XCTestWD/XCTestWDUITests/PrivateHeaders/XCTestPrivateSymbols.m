@@ -15,7 +15,7 @@ NSNumber *XCAXAIsVisibleAttribute;
 NSNumber *XCAXAIsElementAttribute;
 
 void (*XCSetDebugLogger)(id <XCDebugLogDelegate>);
-id<XCDebugLogDelegate> (*XCDebugLogger)();
+id<XCDebugLogDelegate> (*XCDebugLogger)(void);
 
 __attribute__((constructor)) void LoadXCTestSymbols(void)
 {

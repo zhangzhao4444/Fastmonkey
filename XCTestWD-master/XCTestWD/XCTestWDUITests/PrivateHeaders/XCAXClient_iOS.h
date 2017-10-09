@@ -39,7 +39,7 @@
 - (void)handleUserTestingNotification:(id)arg1;
 - (id)elementAtPoint:(CGPoint)arg1 error:(id *)arg2;
 - (BOOL)cachedAccessibilityLoadedValueForPID:(int)arg1;
-- (NSArray<XCAccessibilityElement *> *)activeApplications;
+- (id)activeApplications;
 - (id)systemApplication;
 - (BOOL)enableFauxCollectionViewCells:(id *)arg1;
 - (BOOL)loadAccessibility:(id *)arg1;
