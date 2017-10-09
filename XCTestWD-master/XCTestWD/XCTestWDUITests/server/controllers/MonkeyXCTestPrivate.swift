@@ -34,10 +34,8 @@ extension Monkey {
     */
     public func addDefaultXCTestPrivateActions() {
         //addXCTestElementTapAction(weight: 10)
-        
-        
+    
         addXCTestTapAction(weight: 35)
-        
         addXCTestLongPressAction(weight: 1)
         addXCTestDragAction(weight: 1)
         addXCTestPinchCloseAction(weight: 1)

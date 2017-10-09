@@ -2,7 +2,8 @@
 //  XCTestWDXPath.swift
 //  XCTestWD
 //
-//  fixed by zhangzhao on 2017/7/17
+//  Created by zhaoy on 5/5/17.
+//  Copyright © 2017 XCTestWD. All rights reserved.
 //
 
 import Foundation

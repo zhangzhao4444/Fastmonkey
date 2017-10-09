@@ -3,6 +3,7 @@
 //  FastMonkey
 //
 //  fixed by zhangzhao on 2017/7/17.
+//  Copyright © 2017年 FastMonkey. All rights reserved.
 //
 
 import Foundation
@@ -259,10 +260,13 @@ extension XCUIElement {
     
     //MARK: Commands
     func tree() -> [String : AnyObject]? {
+        self.safeQueryResolutionEnabled = true
         if self.lastSnapshot == nil {
             self.resolve()
         }
-        
+        if(self.lastSnapshot==nil){
+            return ["result" : "empty" as AnyObject]
+        }
         return dictionaryForElement(self.lastSnapshot)
     }
     
@@ -443,7 +447,7 @@ extension XCElementSnapshot {
         if self.frame.isEmpty || self.visibleFrame.isEmpty
         {return false}
         
-        let app: XCElementSnapshot? = _rootElement() as! XCElementSnapshot?
+        let app: XCElementSnapshot? = rootElement() as! XCElementSnapshot?
         let screenSize: CGSize? = MathUtils.adjustDimensionsForApplication((app?.frame.size)!, (XCUIDevice.shared().orientation))
         let screenFrame = CGRect(x: CGFloat(0), y: CGFloat(0), width: CGFloat((screenSize?.width)!), height: CGFloat((screenSize?.height)!))
         let rectIntersects: Bool = visibleFrame.intersects(screenFrame)

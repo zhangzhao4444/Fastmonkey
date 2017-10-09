@@ -2,7 +2,8 @@
 //  XCTestWDSession.swift
 //  XCTestWD
 //
-//  fixed by zhangzhao on 2017/7/17.
+//  Created by zhaoy on 23/4/17.
+//  Copyright © 2017 XCTestWD. All rights reserved.
 //
 
 import Foundation
@@ -66,23 +67,24 @@ internal class XCTestWDSession {
     
     static func activeApplication() -> XCUIApplication?
     {
-        var activeApplicationElement:XCAccessibilityElement?
-        
-        activeApplicationElement = (XCAXClient_iOS.sharedClient() as! XCAXClient_iOS).activeApplications().first
-        if activeApplicationElement == nil {
-            activeApplicationElement = (XCAXClient_iOS.sharedClient() as! XCAXClient_iOS).systemApplication() as? XCAccessibilityElement
-        }
-        let application = XCUIApplication.app(withPID: (activeApplicationElement?.processIdentifier)!)
-        _ = application?.query()
-        
-        return application
+        //var activeApplicationElement:XCAccessibilityElement?
+
+        //activeApplicationElement = (XCAXClient_iOS.sharedClient() as! XCAXClient_iOS).activeApplications().first
+        //if activeApplicationElement == nil {
+        //    activeApplicationElement = (XCAXClient_iOS.sharedClient() as! XCAXClient_iOS).systemApplication() as? XCAccessibilityElement
+        //}
+        //let application = XCUIApplication.app(withPID: (activeApplicationElement?.processIdentifier)!)
+        //_ = application?.query()
+
+        //return application
+        return XCTestWDApplication.activeApplication()
     }
     
     func resolve() throws {
         self._application.query()
         let pid = self._application.processID
-        let activeApplicationElement = (XCAXClient_iOS.sharedClient() as! XCAXClient_iOS).activeApplications().first
-        let currentprocessID = activeApplicationElement?.processIdentifier
+        let app = XCTestWDSession.activeApplication()
+        let currentprocessID = app?.processID
         if pid != currentprocessID{
             throw OperationError.Error
         }
@@ -109,7 +111,8 @@ internal class XCTestWDSessionManager {
     }
     
     func checkDefaultSessionthrow() throws -> XCTestWDSession {
-        if self.defaultSession == nil || self.defaultSession?.application.accessibilityActivate() == false {
+        //if self.defaultSession == nil || self.defaultSession?.application.accessibilityActivate() == false {
+        if self.defaultSession == nil || self.defaultSession?.application.state != XCUIApplication.State.runningForeground{
             let application = XCTestWDSession.activeApplication()
             self.defaultSession = XCTestWDSession.sessionWithApplication(application!)
         }
@@ -123,7 +126,9 @@ internal class XCTestWDSessionManager {
     }
     
     func checkDefaultSession() -> XCTestWDSession {
-        if self.defaultSession == nil || self.defaultSession?.application.accessibilityActivate() == false {
+//        if self.defaultSession == nil || self.defaultSession?.application.accessibilityActivate() == false {
+        if self.defaultSession == nil || self.defaultSession?.application.state != XCUIApplication.State.runningForeground{
+            sleep(2)
             let application = XCTestWDSession.activeApplication()
             self.defaultSession = XCTestWDSession.sessionWithApplication(application!)
         }

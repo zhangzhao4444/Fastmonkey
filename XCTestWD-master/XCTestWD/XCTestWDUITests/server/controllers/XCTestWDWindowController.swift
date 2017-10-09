@@ -23,7 +23,8 @@ internal class XCTestWDWindowController: Controller {
     
     //MARK: Routing Logic Specification
     internal static func getWindowSize(request: Swifter.HttpRequest) -> Swifter.HttpResponse {
-        let application = XCTestWDSession.activeApplication()
+        let application = XCTestWDSessionManager.singleton.checkDefaultSession().application
+        //let application = XCTestWDSession.activeApplication()
         let frame = application?.wdFrame()
         let screenSize = MathUtils.adjustDimensionsForApplication(frame!.size, UIDeviceOrientation.init(rawValue:(application?.interfaceOrientation.rawValue)!)!)
         

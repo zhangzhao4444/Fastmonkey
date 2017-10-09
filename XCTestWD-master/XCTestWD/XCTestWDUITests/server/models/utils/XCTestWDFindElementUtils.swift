@@ -20,13 +20,8 @@ class XCTestWDFindElementUtils {
     }
     
     static func getAppPid() -> Int32{
-        var activeApplicationElement:XCAccessibilityElement?
-        
-        activeApplicationElement = (XCAXClient_iOS.sharedClient() as! XCAXClient_iOS).activeApplications().first
-        if activeApplicationElement == nil {
-            activeApplicationElement = (XCAXClient_iOS.sharedClient() as! XCAXClient_iOS).systemApplication() as? XCAccessibilityElement
-        }
-        let pid = activeApplicationElement?.processIdentifier
+        let application = XCTestWDSession.activeApplication()
+        let pid = application?.processID
         if pid == nil{
             return 0
         }

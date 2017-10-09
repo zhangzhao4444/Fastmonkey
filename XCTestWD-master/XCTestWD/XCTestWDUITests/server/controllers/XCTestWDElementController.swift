@@ -193,7 +193,6 @@ internal class XCTestWDElementController: Controller {
             element?.tap()
         }
         if element?.hasKeyboardFocus == true {
-            //element?.typeText("")
             let text:String = firstNonEmptyValue(element?.wdValue() as? String, element?.wdLabel()) ?? ""
             let len = text.characters.count
             var bom = "\u{8}"
@@ -202,6 +201,7 @@ internal class XCTestWDElementController: Controller {
                 typeString=typeString + bom
             }
             element?.typeText(typeString)
+            //element?.typeText("")
             return XCTestWDResponse.response(session: nil, error: WDStatus.Success)
         }
         

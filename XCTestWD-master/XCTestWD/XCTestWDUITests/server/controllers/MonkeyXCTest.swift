@@ -38,12 +38,12 @@ extension Monkey {
             //                button.tap()
             //            }
             usleep(2000000)
-            let isRunning = application.running
-            let current = Int(XCTestWDFindElementUtils.getAppPid())
-            if current == 0 {
-                return
-            }
-            if current == self!.pid && isRunning {
+            //let isRunning = application.running
+            //let current = Int(XCTestWDFindElementUtils.getAppPid())
+            //if current == 0 {
+            //    return
+            //}
+            if application.state == XCUIApplication.State.runningForeground {
                 for i in 0 ..< application.alerts.count {
                     let alert = application.alerts.element(boundBy: i)
                     let buttons = alert.descendants(matching: .button)
@@ -52,7 +52,7 @@ extension Monkey {
                     button.tap()
                 }
             }else{
-                application.launch()
+                application.activate()
                 self!.sleep(5)
                 self?.pid = Int(XCTestWDFindElementUtils.getAppPid())
             }
@@ -66,13 +66,21 @@ extension Monkey {
     
     public func addXCTestCheckCurrentApp(interval:Int, application:XCUIApplication) {
         addCheck(interval:interval){ [weak self] in
-            let work = DispatchWorkItem(qos:.userInteractive){
+            //let work = DispatchWorkItem(qos:.userInteractive){
                 /** too slow **/
                 //application._waitForQuiescence()
-                let isRunning = application.running
-                let current = Int(XCTestWDFindElementUtils.getAppPid())
-                if current != self?.pid || !isRunning{
-                    application.launch()
+            //    let isRunning = application.running
+            //    let current = Int(XCTestWDFindElementUtils.getAppPid())
+            //    if current != self?.pid || !isRunning{
+            //        application.launch()
+            //        self?.sleep(5)
+            //        self?.pid = Int(XCTestWDFindElementUtils.getAppPid())
+            //    }
+            //}
+            //DispatchQueue.main.async(execute:work)
+            let work = DispatchWorkItem(qos:.userInteractive){
+                if (application.state != XCUIApplication.State.runningForeground){
+                    application.activate()
                     self?.sleep(5)
                     self?.pid = Int(XCTestWDFindElementUtils.getAppPid())
                 }

@@ -66,17 +66,17 @@ public class Monkey {
     var r: Random
     let frame: CGRect
 
-    var randomActions: [(accumulatedWeight: Double, action: (Void) -> Void)]
+    var randomActions: [(accumulatedWeight: Double, action: () -> Void)]
     var totalWeight: Double
 
-    var regularActions: [(interval: Int, action: (Void) -> Void)]
+    var regularActions: [(interval: Int, action: () -> Void)]
     var actionCounter = 0
     
-    var specalActions: [(Void) -> Void]
+    var specalActions: [() -> Void]
     var actionSpecalCounter = 0
     let lock = DispatchSemaphore(value: 1)
 
-    var checkActions: [(interval: Int, action: (Void) -> Void)]
+    var checkActions: [(interval: Int, action: () -> Void)]
     var pid = 0
     
     var count = 0
@@ -284,7 +284,7 @@ public class Monkey {
         - parameter action: The block to run when this event
           is generated.
     */
-    public func addAction(weight: Double, action: @escaping (Void) -> Void) {
+    public func addAction(weight: Double, action: @escaping () -> Void) {
         totalWeight += weight
         randomActions.append((accumulatedWeight: totalWeight, action: action))
     }
@@ -298,21 +298,21 @@ public class Monkey {
         - parameter action: The block to run when this event
           is generated.
     */
-    public func addAction(interval: Int, action: @escaping (Void) -> Void) {
+    public func addAction(interval: Int, action: @escaping () -> Void) {
         regularActions.append((interval: interval, action: action))
     }
 
     /**
         Add a block for generating check events
     */
-    public func addCheck(interval:Int, action: @escaping (Void) -> Void){
+    public func addCheck(interval:Int, action: @escaping () -> Void){
         checkActions.append((interval: interval, action: action))
     }
 
     /**
         Add a block for generating special events
     */
-    public func addAction(action: @escaping (Void) -> Void){
+    public func addAction(action: @escaping () -> Void){
         specalActions.append(action)
     }
 

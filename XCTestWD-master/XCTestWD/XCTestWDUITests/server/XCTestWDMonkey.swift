@@ -11,7 +11,9 @@ import Foundation
 public class XCTestWDMonkey {
 
     func startMonkey() -> Int {
-        let bundleID = "com.pandatv.test.meizi"
+        
+        let bundleID = "com.PandaTV.Live-iPhone"
+        //let bundleID = "com.pandatv.test.meizi"
 
         var app : XCUIApplication!
         var session : XCTestWDSession!
