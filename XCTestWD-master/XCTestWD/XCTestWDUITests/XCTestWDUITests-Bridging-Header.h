@@ -6,6 +6,7 @@
 //  Copyright © 2017 XCTestWD. All rights reserved.
 //
 
+#import "XCTestWDApplication.h" 
 #import "CDStructures.h"
 #import "XCUIElementQuery.h"
 #import "XCUIElement.h"
