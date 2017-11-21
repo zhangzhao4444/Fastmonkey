@@ -187,11 +187,11 @@ extension HttpRequest {
     
     var jsonBody:JSON {
         get {
-			do{
-				let data = try JSON(data: NSData(bytes: &self.body, length: self.body.count) as Data)
-				return data
-			}catch{
-				return "data error"
+			      do{
+				        let data = try JSON(data: NSData(bytes: &self.body, length: self.body.count) as Data)
+				        return data
+			      }catch{
+				        return "data error"
         }
     }
 }
