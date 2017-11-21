@@ -187,7 +187,11 @@ extension HttpRequest {
     
     var jsonBody:JSON {
         get {
-            return JSON(data: NSData(bytes: &self.body, length: self.body.count) as Data)
+			do{
+				let data = try JSON(data: NSData(bytes: &self.body, length: self.body.count) as Data)
+				return data
+			}catch{
+				return "data error"
         }
     }
 }
