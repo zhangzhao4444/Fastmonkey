@@ -1,7 +1,7 @@
 {
   "name": "xctestwd",
-  "version": "1.1.0",
-  "description": "A Swift implementation of WebDriver server for iOS that runs on Simulator/iOS devices. ",
+  "version": "1.3.27",
+  "description": "Swift implementation of WebDriver server for iOS that runs on Simulator/iOS devices.",
   "keywords": [
     "iOS",
     "xctest"
@@ -12,28 +12,35 @@
   },
   "main": "index.js",
   "dependencies": {
-    "detect-port": "^1.1.3",
     "ios-utils": "~1.0.0",
-    "macaca-utils": "~0.1.8",
+    "macaca-doctor": "^2.0.4",
+    "macaca-utils": "^1.0.0",
     "request": "~2.69.0",
+    "shelljs": "^0.7.8",
     "webdriver-dfn-error-code": "~1.0.1",
     "xcode": "^0.8.9",
-    "xctestwd": "^1.0.0",
+    "xctestwd-frameworks-9.1": "^1.0.1",
+    "xctestwd-frameworks-9.2": "^1.0.0",
+    "xctestwd-frameworks-93": "^1.0.0",
     "xlogger": "~1.0.0"
   },
   "devDependencies": {
     "co-mocha": "*",
+    "eslint": "^4.13.0",
+    "eslint-plugin-mocha": "^4.11.0",
+    "git-contributor": "^1.0.0",
     "istanbul": "*",
-    "jshint": "*",
-    "macaca-utils": "^0.1.8",
     "mocha": "*",
-    "pre-commit": "1.1.1",
-    "should": "*"
+    "pre-commit": "*"
   },
+  "pre-commit": [
+    "lint"
+  ],
   "scripts": {
-    "test": "make test",
-    "jshint": "make jshint",
-    "install": "node ./scripts/install.js"
+    "test": "mocha",
+    "lint": "eslint . --fix",
+    "install": "node ./scripts/install.js",
+    "contributor": "git-contributor"
   },
   "site": "https://macacajs.github.io",
   "license": "MIT"
