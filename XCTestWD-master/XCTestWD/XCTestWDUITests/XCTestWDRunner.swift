@@ -10,7 +10,7 @@ import Swifter
 
 
 class XCTextWDRunner: XCTestCase {
-    var serverMode = true
+    var serverMode = false
     var server: XCTestWDServer?
     var monkey: XCTestWDMonkey?
     override func setUp() {

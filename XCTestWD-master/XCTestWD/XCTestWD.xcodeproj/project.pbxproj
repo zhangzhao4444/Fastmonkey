@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		138D4F53207B3E5900541495 /* XCTestWDMonkey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 138D4F52207B3E5900541495 /* XCTestWDMonkey.swift */; };
+		138D4F56207B3E6B00541495 /* XCTestWDApplication.m in Sources */ = {isa = PBXBuildFile; fileRef = 138D4F54207B3E6B00541495 /* XCTestWDApplication.m */; };
+		138D4F57207B3E6B00541495 /* XCTestWDApplication.h in Headers */ = {isa = PBXBuildFile; fileRef = 138D4F55207B3E6B00541495 /* XCTestWDApplication.h */; };
 		22AC58421F42E0BE006F85D7 /* Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 22AC58021F42E0BE006F85D7 /* Info.plist */; };
 		22AC58431F42E0BE006F85D7 /* CDStructures.h in Headers */ = {isa = PBXBuildFile; fileRef = 22AC58041F42E0BE006F85D7 /* CDStructures.h */; };
 		22AC58441F42E0BE006F85D7 /* XCAccessibilityElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 22AC58051F42E0BE006F85D7 /* XCAccessibilityElement.h */; };
@@ -80,6 +83,9 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		138D4F52207B3E5900541495 /* XCTestWDMonkey.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = XCTestWDMonkey.swift; sourceTree = "<group>"; };
+		138D4F54207B3E6B00541495 /* XCTestWDApplication.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = XCTestWDApplication.m; sourceTree = "<group>"; };
+		138D4F55207B3E6B00541495 /* XCTestWDApplication.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCTestWDApplication.h; sourceTree = "<group>"; };
 		22AC58021F42E0BE006F85D7 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		22AC58041F42E0BE006F85D7 /* CDStructures.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = CDStructures.h; sourceTree = "<group>"; };
 		22AC58051F42E0BE006F85D7 /* XCAccessibilityElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = XCAccessibilityElement.h; sourceTree = "<group>"; };
@@ -181,6 +187,8 @@
 		22AC58031F42E0BE006F85D7 /* PrivateHeaders */ = {
 			isa = PBXGroup;
 			children = (
+				138D4F55207B3E6B00541495 /* XCTestWDApplication.h */,
+				138D4F54207B3E6B00541495 /* XCTestWDApplication.m */,
 				22AC58041F42E0BE006F85D7 /* CDStructures.h */,
 				22AC58051F42E0BE006F85D7 /* XCAccessibilityElement.h */,
 				22AC58061F42E0BE006F85D7 /* XCAXClient_iOS.h */,
@@ -209,6 +217,7 @@
 		22AC58191F42E0BE006F85D7 /* server */ = {
 			isa = PBXGroup;
 			children = (
+				138D4F52207B3E5900541495 /* XCTestWDMonkey.swift */,
 				22AC581A1F42E0BE006F85D7 /* controllers */,
 				22AC582F1F42E0BE006F85D7 /* models */,
 				22AC583D1F42E0BE006F85D7 /* XCTestWDController.swift */,
@@ -364,6 +373,7 @@
 				22AC58471F42E0BE006F85D7 /* XCElementSnapshot.h in Headers */,
 				22AC584D1F42E0BE006F85D7 /* XCTestDriverInterface-Protocol.h in Headers */,
 				22AC58441F42E0BE006F85D7 /* XCAccessibilityElement.h in Headers */,
+				138D4F57207B3E6B00541495 /* XCTestWDApplication.h in Headers */,
 				22AC58481F42E0BE006F85D7 /* XCRuntimeUtils.h in Headers */,
 				22AC58511F42E0BE006F85D7 /* XCTestPrivateSymbols.h in Headers */,
 				22AC58531F42E0BE006F85D7 /* XCTRunnerDaemonSession.h in Headers */,
@@ -427,13 +437,13 @@
 				TargetAttributes = {
 					63D408161EAB629400198736 = {
 						CreatedOnToolsVersion = 8.3.1;
-						DevelopmentTeam = N5G28WF2Y2;
+						DevelopmentTeam = UMK6KEYDD2;
 						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 					63D4082A1EAB629400198736 = {
 						CreatedOnToolsVersion = 8.3.1;
-						DevelopmentTeam = N5G28WF2Y2;
+						DevelopmentTeam = UMK6KEYDD2;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
@@ -524,7 +534,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "rm -rf ../Carthage/Checkouts/Fuzi/libxml2/";
+			shellScript = "";
 		};
 		7FA43F311F0CB57400FB2332 /* ShellScript */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -563,6 +573,7 @@
 				22AC58491F42E0BE006F85D7 /* XCRuntimeUtils.m in Sources */,
 				22AC58611F42E0BE006F85D7 /* XCTestWDExecuteController.swift in Sources */,
 				22AC58781F42E0BE006F85D7 /* XCTestWDDispatch.swift in Sources */,
+				138D4F53207B3E5900541495 /* XCTestWDMonkey.swift in Sources */,
 				22AC586D1F42E0BE006F85D7 /* XCTestWDApplicationTree.swift in Sources */,
 				22AC58701F42E0BE006F85D7 /* XCTestWDAlert.swift in Sources */,
 				22AC58741F42E0BE006F85D7 /* XCTestWDStatus.swift in Sources */,
@@ -572,6 +583,7 @@
 				22AC585E1F42E0BE006F85D7 /* XCTestWDAlertController.swift in Sources */,
 				22AC58521F42E0BE006F85D7 /* XCTestPrivateSymbols.m in Sources */,
 				22AC58621F42E0BE006F85D7 /* XCTestWDKeysController.swift in Sources */,
+				138D4F56207B3E6B00541495 /* XCTestWDApplication.m in Sources */,
 				22AC58771F42E0BE006F85D7 /* XCTestWDController.swift in Sources */,
 				22AC58661F42E0BE006F85D7 /* XCTestWDSourceController.swift in Sources */,
 				22AC58681F42E0BE006F85D7 /* XCTestWDTimeoutController.swift in Sources */,
@@ -724,13 +736,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = N5G28WF2Y2;
+				DEVELOPMENT_TEAM = UMK6KEYDD2;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../Carthage/Build/iOS";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = XCTestWD/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = XCTestWD.XCTestWD;
+				PRODUCT_BUNDLE_IDENTIFIER = XCTestWD.XCTestWDeeq;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "XCTestWD/XCTestWD-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -745,13 +757,13 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = N5G28WF2Y2;
+				DEVELOPMENT_TEAM = UMK6KEYDD2;
 				FRAMEWORK_SEARCH_PATHS = "$(SRCROOT)/../Carthage/Build/iOS";
 				HEADER_SEARCH_PATHS = "";
 				INFOPLIST_FILE = XCTestWD/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = XCTestWD.XCTestWD;
+				PRODUCT_BUNDLE_IDENTIFIER = XCTestWD.XCTestWDeeq;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "XCTestWD/XCTestWD-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
@@ -763,7 +775,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = N5G28WF2Y2;
+				DEVELOPMENT_TEAM = UMK6KEYDD2;
 				GCC_PREPROCESSOR_DEFINITIONS = "XCTESTWD_PORT=$(XCTESTWD_PORT)";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -774,7 +786,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = "-lxml2";
-				PRODUCT_BUNDLE_IDENTIFIER = XCTestWD.XCTestWDUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = XCTestWD.XCTestWDUITestsee;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_INCLUDE_PATHS = "$(SDKROOT)/usr/include/libxml2";
@@ -790,7 +802,7 @@
 			buildSettings = {
 				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				CLANG_ENABLE_MODULES = YES;
-				DEVELOPMENT_TEAM = N5G28WF2Y2;
+				DEVELOPMENT_TEAM = UMK6KEYDD2;
 				GCC_PREPROCESSOR_DEFINITIONS = "XCTESTWD_PORT=$(XCTESTWD_PORT)";
 				HEADER_SEARCH_PATHS = (
 					"$(inherited)",
@@ -801,7 +813,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
 				OTHER_LDFLAGS = "-lxml2";
-				PRODUCT_BUNDLE_IDENTIFIER = XCTestWD.XCTestWDUITests;
+				PRODUCT_BUNDLE_IDENTIFIER = XCTestWD.XCTestWDUITestsee;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_INCLUDE_PATHS = "$(SDKROOT)/usr/include/libxml2";
