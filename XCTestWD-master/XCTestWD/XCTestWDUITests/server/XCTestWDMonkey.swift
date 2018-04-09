@@ -12,7 +12,7 @@ public class XCTestWDMonkey {
 
     func startMonkey() -> Int {
         
-        let bundleID = "com.tencent.microvision"
+        let bundleID = "com.PandaTV.Live-iPhone"
         //let bundleID = "com.pandatv.test.meizi"
 
         var app : XCUIApplication!
