@@ -52,7 +52,9 @@ class XCProxy {
         reqOpts.json = body;
       }
 
-      logger.debug(`Proxy: ${url}:${method} to ${newUrl}:${method} with body: ${_.trunc(JSON.stringify(body), 200)}`);
+      logger.debug(`Proxy: ${url}:${method} to ${newUrl}:${method} with body: ${_.truncate(JSON.stringify(body), {
+        length: 200
+      })}`);
 
       _.retry(() => {
         return new Promise((_resolve, _reject) => {
@@ -63,7 +65,7 @@ class XCProxy {
             }
 
             if (!body) {
-              logger.debug(`xctest client proxy received no data.`);
+              logger.debug('xctest client proxy received no data.');
               return _reject('No data received from XCTestWD.');
             }
 
@@ -80,7 +82,9 @@ class XCProxy {
               body.sessionId = this.originSessionId;
             }
 
-            logger.debug(`Got response with status ${res.statusCode}: ${_.trunc(JSON.stringify(body), 200)}`);
+            logger.debug(`Got response with status ${res.statusCode}: ${_.truncate(JSON.stringify(body), {
+              length: 200
+            })}`);
             _resolve(body);
           });
 

@@ -2,44 +2,56 @@
 //  testUITests.swift
 //  testUITests
 //
-//  fixed by zhangzhao on 29/08/2017.
+//  Created by xdf on 14/04/2017.
+//  Copyright © 2017 xdf. All rights reserved.
 //
 
 import XCTest
 import Swifter
+import XCTestWD
 
-
-class XCTextWDRunner: XCTestCase {
-    var serverMode = false
+public class XCTextWDRunner: XCTestWDFailureProofTest {
     var server: XCTestWDServer?
     var monkey: XCTestWDMonkey?
-    override func setUp() {
+    override public func setUp() {
         super.setUp()
         continueAfterFailure = false
+        XCTestWDSessionManager.singleton.clearAll()
+        XCUIDevice.shared.press(XCUIDevice.Button.home)
+        sleep(2)
+
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(terminate(notification:)),
-                                               name: NSNotification.Name(rawValue: XCTestWDSessionShutDown),
+                                               name: NSNotification.Name(rawValue: "XCTestWDSessionShutDown"),
                                                object: nil)
     }
     
-    override func tearDown() {
+    override public func tearDown() {
         super.tearDown()
+        XCUIDevice.shared.press(XCUIDevice.Button.home)
+        XCUIDevice.shared.press(XCUIDevice.Button.home)
+        XCTestWDSessionManager.singleton.clearAll()
     }
     
     func testRunner() {
-        if serverMode {
-            self.server = XCTestWDServer()
-            self.server?.startServer()
-        }else{
-            self.monkey = XCTestWDMonkey()
-            _ = self.monkey?.startMonkey()
-        }
+        self.monkey = XCTestWDMonkey()
+        _ = self.monkey?.startMonkey()
+
     }
     
-    @objc func terminate(notification: NSNotification){
-        if serverMode {
-            self.server?.stopServer()
-        }
+//    func testMultipleApps() {
+//
+//        let settingsApp = XCUIApplication(bundleIdentifier: "com.bytedance.ee.microapp.demo")
+//        settingsApp.launch()
+//        sleep(5)
+//        settingsApp.terminate()
+//
+//        print("lalalalalala:\(settingsApp.state)")
+//
+//    }
+
+    @objc func terminate(notification: NSNotification) {
+        self.server?.stopServer();
         NSLog("XCTestWDTearDown->Session Reset")
         assert(false, "")
     }

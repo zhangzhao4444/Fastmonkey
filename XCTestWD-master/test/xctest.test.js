@@ -1,11 +1,11 @@
 'use strict';
 
-require('should');
+const assert = require('assert');
 
-var XCTest = require('..');
+const XCTest = require('..');
 
 describe('test', function() {
   it('should be ok', function() {
-    XCTest.should.be.ok();
+    assert.ok(XCTest);
   });
 });

@@ -3,7 +3,6 @@
 const url = require('url');
 const path = require('path');
 const iOSUtils = require('ios-utils');
-const detect = require('detect-port');
 const EventEmitter = require('events');
 const childProcess = require('child_process');
 
@@ -13,9 +12,13 @@ const XCProxy = require('./proxy');
 const logger = require('./logger');
 const XCTestWD = require('./xctestwd');
 
+const {
+  detectPort
+} = _;
 const TEST_URL = pkg.site;
 const projectPath = XCTestWD.projectPath;
 const SERVER_URL_REG = XCTestWD.SERVER_URL_REG;
+const simulatorLogFlag = XCTestWD.simulatorLogFlag;
 
 class XCTest extends EventEmitter {
   constructor(options) {
@@ -33,18 +36,18 @@ class XCTest extends EventEmitter {
       urlBase: 'wd/hub'
     }, options || {});
     this.init();
+  }
+
+  init() {
+    this.checkProjectPath();
     process.on('uncaughtException', (e) => {
-      logger.debug('Uncaught Exception: ' + e);
+      logger.error(`Uncaught Exception: ${e.stack}`);
       this.stop();
       process.exit(1);
     });
     process.on('exit', () => {
       this.stop();
     });
-  }
-
-  init() {
-    this.checkProjectPath();
   }
 
   checkProjectPath() {
@@ -69,15 +72,18 @@ class XCTest extends EventEmitter {
     });
   }
 
-  *startSimLog() {
-    this.startBootstrap();
+  * startSimLog() {
+    const logPath = yield this.startBootstrap();
+    const logDir = path.resolve(logPath);
     return _.retry(() => {
       return new Promise((resolve, reject) => {
-        let logDir = path.resolve(this.device.getLogDir(), 'system.log');
-        if (!_.isExistedFile(logDir)) {
+        const logTxtFile = path.join(logDir, '..', 'StandardOutputAndStandardError.txt');
+        logger.info(`Read simulator log at: ${logTxtFile}`);
+
+        if (!_.isExistedFile(logTxtFile)) {
           return reject();
         }
-        let args =`-f -n 0 ${logDir}`.split(' ');
+        let args = `-f -n 0 ${logTxtFile}`.split(' ');
         var proc = childProcess.spawn('tail', args, {});
         this.deviceLogProc = proc;
 
@@ -85,7 +91,12 @@ class XCTest extends EventEmitter {
         proc.stdout.setEncoding('utf8');
 
         proc.stdout.on('data', data => {
-          //logger.debug(data);
+
+          // avoid logout long data such as bitmap
+          if (data.length <= 300 && logger.debugMode) {
+            // logger.debug(data);
+          }
+
           let match = SERVER_URL_REG.exec(data);
           if (match) {
             const url = match[1];
@@ -112,25 +123,30 @@ class XCTest extends EventEmitter {
     }, 1000, Infinity);
   }
 
-  *startDeviceLog() {
+  * startDeviceLog() {
+    yield this.startBootstrap();
     var proc = childProcess.spawn(iOSUtils.devicelog.binPath, [this.device.deviceId], {});
     this.deviceLogProc = proc;
 
     proc.stderr.setEncoding('utf8');
     proc.stdout.setEncoding('utf8');
 
-    yield this.startIproxy();
-
     return new Promise((resolve, reject) => {
       proc.stdout.on('data', data => {
+
+        // avoid logout long data such as bitmap
+        if (data.length <= 300 && logger.debugMode) {
+          logger.debug(data);
+        }
+
         let match = SERVER_URL_REG.exec(data);
         if (match) {
           const url = match[1];
           if (url.startsWith('http://')) {
+            this.configUrl(url);
             resolve();
           }
         }
-        // logger.debug(data);
       });
 
       proc.stderr.on('data', data => {
@@ -145,46 +161,55 @@ class XCTest extends EventEmitter {
         logger.warn(`devicelog exit with code: ${code}, signal: ${signal}`);
         reject();
       });
-      this.startBootstrap();
     });
   }
 
-  startBootstrap() {
+  * startBootstrap() {
+    return new Promise((resolve, reject) => {
+      logger.info(`XCTestWD version: ${XCTestWD.version}`);
 
-    logger.info(`XCTestWD version: ${XCTestWD.version}`);
-    var args = `clean test -project ${XCTestWD.projectPath} -scheme ${XCTestWD.schemeName} -destination id=${this.device.deviceId} XCTESTWD_PORT=${this.proxyPort}`.split(' ');
-    var env = _.merge({}, process.env, {
-      XCTESTWD_PORT: this.proxyPort
-    });
+      var args = `clean test -project ${XCTestWD.projectPath} -scheme XCTestWDUITests -destination id=${this.device.deviceId} XCTESTWD_PORT=${this.proxyPort}`.split(' ');
+      var env = _.merge({}, process.env, {
+        XCTESTWD_PORT: this.proxyPort
+      });
 
-    var proc = childProcess.spawn('xcodebuild', args, {
-      env: env
-    });
-    this.runnerProc = proc;
-    proc.stderr.setEncoding('utf8');
-    proc.stdout.setEncoding('utf8');
+      var proc = childProcess.spawn('xcodebuild', args, {
+        env: env
+      });
+      this.runnerProc = proc;
+      proc.stderr.setEncoding('utf8');
+      proc.stdout.setEncoding('utf8');
 
-    proc.stdout.on('data', data => {
-      //logger.debug(data);
-    });
+      proc.stdout.on('data', data => {
+        // logger.debug(data);
+      });
 
-    proc.stderr.on('data', data => {
-      logger.debug(data);
-      logger.debug(`please check project: ${projectPath}`);
-    });
+      proc.stderr.on('data', data => {
+        // logger.debug(data);
 
-    proc.stdout.on('error', (err) => {
-      logger.warn(`xctest client error with ${err}`);
-      logger.debug(`please check project: ${projectPath}`);
-    });
+        if (~data.indexOf(simulatorLogFlag)) {
+          const list = data.split(simulatorLogFlag);
+          const res = list[1].trim();
+          resolve(res);
+        } else {
+          logger.debug(`please check project: ${projectPath}`);
+        }
+      });
 
-    proc.on('exit', (code, signal) => {
-      this.stop();
-      logger.warn(`xctest client exit with code: ${code}, signal: ${signal}`);
+      proc.stdout.on('error', (err) => {
+        logger.warn(`xctest client error with ${err}`);
+        logger.debug(`please check project: ${projectPath}`);
+      });
+
+      proc.on('exit', (code, signal) => {
+        this.stop();
+        logger.warn(`xctest client exit with code: ${code}, signal: ${signal}`);
+      });
+
     });
   }
 
-  *startIproxy() {
+  * startIproxy() {
     let args = [this.proxyPort, this.proxyPort, this.device.deviceId];
 
     const IOS_USBMUXD_IPROXY = 'iproxy';
@@ -200,7 +225,7 @@ class XCTest extends EventEmitter {
     });
 
     proc.stderr.on('data', () => {
-      //logger.debug(data);
+      // logger.debug(data);
     });
 
     proc.stdout.on('error', (err) => {
@@ -212,11 +237,9 @@ class XCTest extends EventEmitter {
     });
   }
 
-  *start(caps) {
+  * start(caps) {
     try {
-      this.proxyPort = yield detect(this.proxyPort);
-
-      logger.info(`${pkg.name} start with port: ${this.proxyPort}`);
+      this.proxyPort = yield detectPort(this.proxyPort);
 
       this.capabilities = caps;
       const xcodeVersion = yield iOSUtils.getXcodeVersion();
@@ -227,9 +250,12 @@ class XCTest extends EventEmitter {
 
       if (deviceInfo.isRealIOS) {
         yield this.startDeviceLog();
+        yield this.startIproxy();
       } else {
         yield this.startSimLog();
       }
+
+      logger.info(`${pkg.name} start with port: ${this.proxyPort}`);
 
       this.initProxy();
 
