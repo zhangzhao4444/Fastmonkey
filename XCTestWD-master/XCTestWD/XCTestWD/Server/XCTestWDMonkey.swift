@@ -14,8 +14,7 @@ public class XCTestWDMonkey {
     }
     public func startMonkey() -> Int {
         
-        let bundleID = "com.bytedance.ee.microapp.demo"
-        //let bundleID = "com.pandatv.test.meizi"
+        let bundleID = "com.pandatv.test.meizi"
 
         var app : XCUIApplication!
         var session : XCTestWDSession!
