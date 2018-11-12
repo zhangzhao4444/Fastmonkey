@@ -1,6 +1,6 @@
-github "glock45/swifter" == 1.3.3
+github "httpswift/swifter" == 1.4.3
 github "SwiftyJSON/SwiftyJSON"
-github "lovexiaov/Fuzi"
-github "tadija/AEXML"
+github "cezheng/Fuzi" ~> 2.1.0
+github "tadija/AEXML" == 4.2.2
 github "CocoaLumberjack/CocoaLumberjack"
 github "Quick/Nimble"

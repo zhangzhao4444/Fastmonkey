@@ -4,7 +4,7 @@ We love pull requests from everyone.
 
 ## Link Global To Local
 
-``` bash
+```bash
 $ cd path/to/macaca-ios
 $ npm link path/to/XCTestWD
 # now project XCTestWD is linked to macaca-ios
@@ -12,7 +12,7 @@ $ npm link path/to/XCTestWD
 
 ## Run with XCode
 
-``` bash
+```bash
 $ open ./XCTestWD/XCTestWD.xcodeproj
 # run test(command + u) in XCTestWDUITests schema
 # ./XCTestWD/curlTests.sh is some useful restful testing scripts

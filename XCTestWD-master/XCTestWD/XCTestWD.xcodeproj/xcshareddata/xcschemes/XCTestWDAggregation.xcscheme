@@ -14,9 +14,9 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "63D4082A1EAB629400198736"
-               BuildableName = "XCTestWDUITests.xctest"
-               BlueprintName = "XCTestWDUITests"
+               BlueprintIdentifier = "7F2B0207203C265F00B07F50"
+               BuildableName = "XCTestWDAggregation"
+               BlueprintName = "XCTestWDAggregation"
                ReferencedContainer = "container:XCTestWD.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
@@ -26,28 +26,10 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      language = ""
       shouldUseLaunchSchemeArgsEnv = "YES">
       <Testables>
-         <TestableReference
-            skipped = "NO">
-            <BuildableReference
-               BuildableIdentifier = "primary"
-               BlueprintIdentifier = "63D4082A1EAB629400198736"
-               BuildableName = "XCTestWDUITests.xctest"
-               BlueprintName = "XCTestWDUITests"
-               ReferencedContainer = "container:XCTestWD.xcodeproj">
-            </BuildableReference>
-         </TestableReference>
       </Testables>
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "63D408161EAB629400198736"
-            BuildableName = "XCTestWDDemo.app"
-            BlueprintName = "XCTestWDDemo"
-            ReferencedContainer = "container:XCTestWD.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
       <AdditionalOptions>
       </AdditionalOptions>
    </TestAction>
@@ -55,6 +37,7 @@
       buildConfiguration = "Debug"
       selectedDebuggerIdentifier = "Xcode.DebuggerFoundation.Debugger.LLDB"
       selectedLauncherIdentifier = "Xcode.DebuggerFoundation.Launcher.LLDB"
+      language = ""
       launchStyle = "0"
       useCustomWorkingDirectory = "NO"
       ignoresPersistentStateOnLaunch = "NO"
@@ -64,9 +47,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "63D4082A1EAB629400198736"
-            BuildableName = "XCTestWDUITests.xctest"
-            BlueprintName = "XCTestWDUITests"
+            BlueprintIdentifier = "7F2B0207203C265F00B07F50"
+            BuildableName = "XCTestWDAggregation"
+            BlueprintName = "XCTestWDAggregation"
             ReferencedContainer = "container:XCTestWD.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
@@ -82,9 +65,9 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "63D4082A1EAB629400198736"
-            BuildableName = "XCTestWDUITests.xctest"
-            BlueprintName = "XCTestWDUITests"
+            BlueprintIdentifier = "7F2B0207203C265F00B07F50"
+            BuildableName = "XCTestWDAggregation"
+            BlueprintName = "XCTestWDAggregation"
             ReferencedContainer = "container:XCTestWD.xcodeproj">
          </BuildableReference>
       </MacroExpansion>

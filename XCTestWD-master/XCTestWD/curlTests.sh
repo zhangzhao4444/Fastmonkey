@@ -11,7 +11,7 @@ echo "\n#### $1 ####"
 TagHead "Create Session"
 
 curl -X POST $JSON_HEADER \
--d "{\"desiredCapabilities\":{\"deviceName\":\"iPhone 6\",\"platformName\":\"iOS\", \"bundleId\":\"xudafeng.ios-app-bootstrap\",\"autoAcceptAlerts\":false}}" \
+-d "{\"desiredCapabilities\":{\"deviceName\":\"iPhone 8\",\"platformName\":\"iOS\", \"bundleId\":\"com.apple.mobilesafari\",\"autoAcceptAlerts\":false}}" \
 $DEVICE_URL/wd/hub/session \
 
 ### Read session as input for next stage testing
@@ -43,19 +43,33 @@ TagHead "Check Source"
 curl -X GET $JSON_HEADER \
 $DEVICE_URL/wd/hub/source \
 
-#TagHead "Press Home"
-#
-#curl -X POST $JSON_HEADER \
-#$DEVICE_URL/wd/hub/session/$sessionID/homeScreen \
+TagHead "Press Home"
+
+curl -X POST $JSON_HEADER \
+$DEVICE_URL/wd/hub/session/$sessionID/homeScreen \
 
 TagHead "Title"
 
 curl -X GET $JSON_HEADER \
 $DEVICE_URL/wd/hub/session/$sessionID/title \
 
-##Session: delete session by ID
+TagHead "Check"
 
-#TagHead "Delete Session By ID"
-#
-#curl -X DELETE $JSON_HEADER \
-#$DEVICE_URL/wd/hub/session/$sessionID \
+curl -X GET $JSON_HEADER \
+$DEVICE_URL/wd/hub/session/$sessionID/title \
+
+TagHead "Trigger touch event by x & y"
+
+curl -X POST $JSON_HEADER \
+-d "{\"using\":\"xpath\",\"value\":\"//*[@name="Messages"]\"}" \
+$DEVICE_URL/wd/hub/session/$sessionID/elements \
+
+curl -X POST $JSON_HEADER \
+-d "{\"using\":\"predicate string\",\"value\":\"label CONTAINS[c] 'Messages'\"}" \
+$DEVICE_URL/wd/hub/session/$sessionID/elements \
+
+echo "\n\ninput the elementID generated:\n"
+read elementID
+
+curl -X POST $JSON_HEADER \
+$DEVICE_URL/wd/hub/session/$sessionID/tap/$elementID \

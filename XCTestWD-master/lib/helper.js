@@ -25,7 +25,7 @@ _.retry = function(func, interval, num) {
   });
 };
 
-_.waitForCondition = function(func, wait/*ms*/, interval/*ms*/) {
+_.waitForCondition = function(func, wait/* ms*/, interval/* ms*/) {
   wait = wait || 5000;
   interval = interval || 500;
   let start = Date.now();
@@ -44,7 +44,7 @@ _.waitForCondition = function(func, wait/*ms*/, interval/*ms*/) {
       };
       func().then(isOk => {
 
-        if (!!isOk) {
+        if (isOk) {
           resolve();
         } else {
           continuation(resolve, reject);
