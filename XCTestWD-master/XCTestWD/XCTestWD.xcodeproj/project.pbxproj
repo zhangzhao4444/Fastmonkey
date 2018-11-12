@@ -23,7 +23,6 @@
 /* Begin PBXBuildFile section */
 		4D2014CF215A057B005010B2 /* XCTAutomationSupport.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 4D2014CE215A057B005010B2 /* XCTAutomationSupport.framework */; };
 		561CCCC6217C08A900A2397A /* Swifter.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 63D4083B1EAB62D500198736 /* Swifter.framework */; };
-		561CCCC8217C114B00A2397A /* Swifter.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 561CCCC7217C114B00A2397A /* Swifter.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		56215930209E98660043B404 /* XCTestWDScreenShotControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5621592F209E98660043B404 /* XCTestWDScreenShotControllerTest.swift */; };
 		56215932209E9A250043B404 /* XCTestWDSourceControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56215931209E9A250043B404 /* XCTestWDSourceControllerTests.swift */; };
 		56234E8620720D95008B8875 /* XCTestWDWindowControllerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 56234E8520720D95008B8875 /* XCTestWDWindowControllerTests.swift */; };
@@ -160,7 +159,6 @@
 			dstPath = "";
 			dstSubfolderSpec = 10;
 			files = (
-				561CCCC8217C114B00A2397A /* Swifter.framework in CopyFiles */,
 				56563F6C2070A240006F4371 /* Nimble.framework in CopyFiles */,
 				5663B8CC206F7F2A005C0CBA /* XCTestWD.framework in CopyFiles */,
 				5663B8B2206F76C0005C0CBA /* AEXML.framework in CopyFiles */,
@@ -191,7 +189,6 @@
 
 /* Begin PBXFileReference section */
 		4D2014CE215A057B005010B2 /* XCTAutomationSupport.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTAutomationSupport.framework; path = Platforms/iPhoneOS.platform/Developer/Library/PrivateFrameworks/XCTAutomationSupport.framework; sourceTree = DEVELOPER_DIR; };
-		561CCCC7217C114B00A2397A /* Swifter.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Swifter.framework; path = ../Carthage/Build/iOS/Swifter.framework; sourceTree = "<group>"; };
 		5621592F209E98660043B404 /* XCTestWDScreenShotControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestWDScreenShotControllerTest.swift; sourceTree = "<group>"; };
 		56215931209E9A250043B404 /* XCTestWDSourceControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestWDSourceControllerTests.swift; sourceTree = "<group>"; };
 		56234E8520720D95008B8875 /* XCTestWDWindowControllerTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = XCTestWDWindowControllerTests.swift; sourceTree = "<group>"; };
@@ -359,7 +356,6 @@
 		63D4080E1EAB629400198736 = {
 			isa = PBXGroup;
 			children = (
-				561CCCC7217C114B00A2397A /* Swifter.framework */,
 				63D4082E1EAB629400198736 /* XCTestWDUITests */,
 				7F8D6298203E57CD00D92323 /* XCTestWD */,
 				5663B89C206F7180005C0CBA /* XCTestWDUnitTest */,
