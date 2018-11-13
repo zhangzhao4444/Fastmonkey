@@ -39,16 +39,6 @@ public class XCTextWDRunner: XCTestWDFailureProofTest {
 
     }
     
-//    func testMultipleApps() {
-//
-//        let settingsApp = XCUIApplication(bundleIdentifier: "com.bytedance.ee.microapp.demo")
-//        settingsApp.launch()
-//        sleep(5)
-//        settingsApp.terminate()
-//
-//        print("lalalalalala:\(settingsApp.state)")
-//
-//    }
 
     @objc func terminate(notification: NSNotification) {
         self.server?.stopServer();

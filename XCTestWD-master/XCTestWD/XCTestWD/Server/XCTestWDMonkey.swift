@@ -14,7 +14,8 @@ public class XCTestWDMonkey {
     }
     public func startMonkey() -> Int {
         
-        let bundleID = "com.pandatv.test.meizi"
+        let bundleID = "com.bytedance.ee.microapp.demo"
+        //let bundleID = "com.pandatv.test.meizi"
 
         var app : XCUIApplication!
         var session : XCTestWDSession!
@@ -25,7 +26,7 @@ public class XCTestWDMonkey {
         if app != nil {
             session = XCTestWDSession.sessionWithApplication(app!)
             XCTestWDSessionManager.singleton.mountSession(session)
-            try? session.resolve()
+            session.resolve()
         }
 
         if app?.processID == 0 {
