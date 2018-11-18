@@ -13,8 +13,9 @@ public class XCTestWDMonkey {
         
     }
     public func startMonkey() -> Int {
-        
         let bundleID = "com.pandatv.test.meizi"
+        // 把bundle ID改为被测试App的bundelID，然后把下面这行代码删除
+        assertionFailure("change bundeID to your own target app")
 
         var app : XCUIApplication!
         var session : XCTestWDSession!
@@ -25,7 +26,7 @@ public class XCTestWDMonkey {
         if app != nil {
             session = XCTestWDSession.sessionWithApplication(app!)
             XCTestWDSessionManager.singleton.mountSession(session)
-            try? session.resolve()
+            session.resolve()
         }
 
         if app?.processID == 0 {
